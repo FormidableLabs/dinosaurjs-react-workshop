@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no" />
+  <title>Spectacle</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster+Two:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
+  <link href="https://unpkg.com/normalize.css@7/normalize.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/prop-types@15/prop-types.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+  <script src="https://unpkg.com/spectacle@^4/dist/spectacle.js"></script>
+  <script src="https://unpkg.com/spectacle@^4/lib/one-page.js"></script>
+  <script type="text/spectacle">
+      () => {
+        // Customize the default theme.
+        const { themes: { defaultTheme } } = Spectacle;
+        const theme = defaultTheme({
+          primary: "white",
+          secondary: "#2980b9",
+          quarternary: "#ffcc99"
+        });
+        theme.screen.components.heading.h1.color = "#2980b9";
+        theme.screen.components.heading.h2.color = "#2980b9";
+        theme.screen.components.heading.h3.color = "#2980b9";
+        theme.screen.components.heading.h4.color = "#2980b9";
+        theme.screen.components.heading.h5.color = "#2980b9";
+        theme.screen.components.text.color = "black";
+        theme.screen.components.listItem.color = "black";
+
+        const { Component } = React;
+        const { Heading, List, ListItem, CodePane } = Spectacle;
+        return (
+          <Deck transition={["fade"]} theme={theme} transitionDuration={500}>
+            <Slide>
+              <Heading>
+                Form Management
+              </Heading>
+            </Slide>
+            <Slide>
+              <Heading>
+                Writing forms SUCKS.
+              </Heading>
+            </Slide>
+            <Slide bgColor='#2a2734'>
+              <CodePane textSize="1rem" lang="javascript" source={`
+                class MyCoolForm extends React.Component {
+                  constructor(props) {
+                    this.state = { email: '' };
+
+                    this.handleNameChange = this.handleNameChange.bind(this);
+                    this.handleSubmit = this.handleSubmit.bind(this);
+                  }
+
+                  render() {
+                    return (
+                      <form onSubmit={this.handleSubmit}>
+                        <label>
+                          Email:
+                          <input
+                            type="text"
+                            name="email"
+                            value={this.state.email}
+                            onChange={() => {this.handleEmailChange(event); }}
+                          />
+                        </label>
+                        <button type="submit" value="Submit"><button/>
+                      </form>
+                    );
+                  }
+                }
+                `}
+              />
+            </Slide>
+            <Slide bgColor="#2a2734">
+              <CodePane textSize="1rem" lang="javascript" source={`
+                  handleEmailChange(event) {
+                    this.setState({ email: event.target.value });
+                  }
+                `}
+              />
+            </Slide>
+            <Slide bgColor="#2a2734">
+              <CodePane textSize="1rem" lang="javascript" source={`
+                {/* A more sophisticated, generic handleChange */}
+                  handleChange(event) {
+                    this.setState({ [event.target.name]: event.target.value });
+                  }
+                `}
+              />
+            </Slide>
+            <Slide>
+              <Heading size={4}>
+                Wait, that's a lot to keep track of
+              </Heading>
+              <List>
+                <ListItem>Form values are managed in state</ListItem>
+                <ListItem>Corresponding validation for each field</ListItem>
+                <ListItem>The forms are often not reusable</ListItem>
+              </List>
+            </Slide>
+            <Slide>
+              <Heading>Formik</Heading>
+            </Slide>
+            <Slide>
+              <Heading size={4}>
+                What do we like about it?
+              </Heading>
+              <List>
+                <ListItem>The form manages itself</ListItem>
+                <ListItem>All you do is handle submission</ListItem>
+                <ListItem>Exposes reusable methods and event handlers</ListItem>
+                <ListItem>Makes validation and error messages easier</ListItem>
+                <ListItem>Supports nested values! e.g. address.street</ListItem>
+              </List>
+            </Slide>
+            <Slide>
+              <Heading size={2}>
+                Using Formik with a render prop
+              </Heading>
+            </Slide>
+            <Slide bgColor="#2a2734">
+              <CodePane textSize="1rem" lang="javascript" source={`
+                <Formik
+                  initialValues={...}
+                  onSubmit={...}
+                  render={({ handleChange, values }) => {
+                    return (
+                      <form onSubmit={this.handleSubmit}>
+                        <label>
+                          Email:
+                          <input
+                            type="text"
+                            name="email"
+                            value={values.email}
+                            onChange={handleChange}
+                          />
+                        </label>
+                        <button type="submit" value="Submit"><button/>
+                      </form>
+                    );
+                  }} />
+                `}
+              />
+            </Slide>
+            <Slide>
+              <List>
+                <ListItem>handleChange, handleBlur, handleSubmit</ListItem>
+                <ListItem>setFieldValue, setFieldTouched, setFieldError</ListItem>
+              </List>
+            </Slide>
+            <Slide bgColor="#2a2734">
+              <CodePane textSize="1rem" lang="javascript" source={`  
+                <Formik
+                  initialValues={{
+                    email,
+                    password,
+                    fruit,
+                    ...
+                  }}
+                  onSubmit={ values => {
+                    console.log(values.email, values.password, values.fruit, ...);
+                  }}
+                  render={...} />
+              `}
+              />
+            </Slide>
+            <Slide>
+              <Heading size={4}>
+                Exercise 1
+              </Heading>
+              <List>
+                <ListItem>Create a form in Formik using the provided form</ListItem>
+                <ListItem>Log the data when the form is submitted</ListItem>
+                <ListItem>Add an additional form input</ListItem>
+              </List>
+            </Slide>
+            <Slide>
+              <List>
+                <ListItem>That's still a lot of boilerplate</ListItem>
+                <ListItem>There's more in Formik that we haven't tapped into.</ListItem>
+              </List>
+            </Slide>
+            <Slide>
+              <Heading>
+                Field
+              </Heading>
+            </Slide>
+            <Slide>
+              <List>
+                <ListItem>Magically connects inputs to Formik using the `name` attribute</ListItem>
+                <ListItem>Change the element by using the `component` prop</ListItem>
+              </List>
+            </Slide>
+            <Slide bgColor="#2a2734">
+              <CodePane textSize="1.25rem" lang="javascript" source={`
+                <Formik
+                  initialValues={...}
+                  onSubmit={...}
+                  render={({ values }) => {
+                    return (
+                      <form onSubmit={this.handleSubmit}>
+                        <label>
+                          Email:
+                          <Field type="text" name="email" />
+                        </label>
+                        <button type="submit" value="Submit"><button/>
+                      </form>
+                    );
+                  }} />
+                `}
+              />
+            </Slide>
+            <Slide>
+              <Heading size={4}>
+                Exercise 2
+              </Heading>
+              <List>
+                <ListItem>Convert all form elements to `Field` tags</ListItem>
+                <ListItem>Make sure the form still works</ListItem>
+              </List>
+            </Slide>
+            <Slide>
+              <Heading size={2}>
+                Everybody Needs Some Validation
+              </Heading>
+            </Slide>
+            <Slide bgColor="#2a2734">
+  <CodePane textSize="1.5rem" lang="javascript" source={`
+    const validate = value => {
+      if (value.length > 50) {
+        return 'The value must be less than 50 characters.';
+      }
+    }
+  `}
+  />
+            </Slide>
+            <Slide>
+              <Heading size={4}>
+                Exercise 3
+              </Heading>
+              <List>
+                <ListItem>Write a function that validates a required input</ListItem>
+                <ListItem>Write a validation function for the select tag</ListItem>
+                <ListItem>Display error messages if the input has been touched</ListItem>
+                <ListItem>Show the errors in the Content component</ListItem>
+              </List>
+            </Slide>
+            <Slide>
+              <Heading size={4}>
+                More things but we won't cover them
+              </Heading>
+              <List>
+                <ListItem>Validation: Yup</ListItem>
+                <ListItem>Custom field types using `Field`</ListItem>
+              </List>
+            </Slide>
+          </Deck>
+        );
+      }
+    </script>
+</body>
+
+</html>
