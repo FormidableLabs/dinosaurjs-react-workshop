@@ -1,40 +1,40 @@
-import React, { Component } from 'react';
-import { Formik, Field } from 'formik';
+import React, { Component } from "react";
+import { Formik, Field } from "formik";
 
-import './FormikForm.css';
+import "../FormikForm.css";
 
-const Content = (props) => (
+const Content = props => (
   <div className="contentWrapper">
     <pre>
       <code>
-        {'values = {'}
-        <p>  email: {props.data.email}</p>
-        <p>  pizzaFruit: {props.data.pizzaFruit}</p>  
-        <p>  password: {props.data.password}</p>
-        <p>  mealDescription: {props.data.mealDescription}</p>
-        {'}\n\n'}
+        {"values = {"}
+        <p> email: {props.data.email}</p>
+        <p> pizzaFruit: {props.data.pizzaFruit}</p>
+        <p> password: {props.data.password}</p>
+        <p> mealDescription: {props.data.mealDescription}</p>
+        {"}"}
       </code>
     </pre>
   </div>
-)
+);
 
 class FormikForm extends Component {
   render() {
     return (
-      <Formik 
-       initialValues={{
-         email: '',
-         password: '',
-         pizzaFruit: ''
-       }}
-       onSubmit={values => {
-         console.log(values);
-       }}
-       render={({ values, handleSubmit }) => {
-         return (
-          <div className="pageWrapper">
-            <div className="formWrapper">
-              <form onSubmit={handleSubmit}>
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          pizzaFruit: "",
+          mealDescription: ""
+        }}
+        onSubmit={values => {
+          console.log(values);
+        }}
+        render={({ values, handleSubmit }) => {
+          return (
+            <div className="pageWrapper">
+              <div className="formWrapper">
                 <Field name="email" placeholder="Email" />
                 <Field name="password" type="password" placeholder="Password" />
                 <Field name="pizzaFruit" component="select">
@@ -44,17 +44,20 @@ class FormikForm extends Component {
                   <option value="mango">Mango</option>
                 </Field>
                 {/* Example solution for solo exercise */}
-                <Field name="mealDescription" placeholder="Describe your last meal" component="textarea" />
+                <Field
+                  name="mealDescription"
+                  placeholder="Describe your last meal"
+                  component="textarea"
+                />
                 {/* ********************************** */}
-                <button type="submit">Submit</button>
-              </form>
+                <button type="submit" onClick={handleSubmit}>
+                  Submit
+                </button>
+              </div>
+              <Content data={values} errors={{}} />
             </div>
-            <Content
-              data={values}
-            />
-          </div>
-         )
-       }}
+          );
+        }}
       />
     );
   }

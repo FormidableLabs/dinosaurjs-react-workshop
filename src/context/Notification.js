@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import './Notification.css';
+import "./Notification.css";
 
-const Notification = (props) => (
-  <div
-    className="notification"
-  >
+const Notification = props => (
+  <div className="notification">
     {props.children}
     <span
-      style={{ float: 'right', cursor: 'pointer' }}
-      onClick={() => { console.log('X clicked'); }}
+      style={{ float: "right", cursor: "pointer" }}
+      onClick={() => {
+        console.log("X clicked");
+      }}
     >
       X
     </span>

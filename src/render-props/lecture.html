@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no" />
-  <title>Spectacle</title>
+  <title>Render Props</title>
   <link href="https://fonts.googleapis.com/css?family=Lobster+Two:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
   <link href="https://unpkg.com/normalize.css@7/normalize.css" rel="stylesheet" type="text/css">
@@ -25,6 +25,7 @@
         const theme = defaultTheme({
           primary: "white",
           secondary: "#2980b9",
+          quarternary: "#ffcc99"
         });
         theme.screen.components.heading.h1.color = "#2980b9";
         theme.screen.components.heading.h2.color = "#2980b9";
@@ -69,13 +70,13 @@
             </Slide>
             <Slide>
               <Heading size={2}>
-                Children Prop
+                Render Prop
               </Heading>
             </Slide>
             <Slide bgColor="#2a2734">
               <CodePane textSize="2rem" lang="javascript" source={`
 <MyComponent
-  children={
+  render={
     (args) => <p>User code</p>
   }
 />
@@ -106,12 +107,17 @@ class MyComponent extends React.Component {
 </MyComponent>
                   `}
                 />
-              </Slide>
-              <Slide>
-                <Heading size={2}>
-                    Exercise
-                </Heading>
-              </Slide>
+            </Slide>
+            <Slide>
+              <Heading size={4}>
+                  Exercise
+              </Heading>
+              <List>
+                <ListItem>Pass a url to Fetch to get data</ListItem>
+                <ListItem>Use `loading`, `data`, and `error` to store data in Fetch's state</ListItem>
+                <ListItem>Render the data, error or loading with a render prop in RenderPropsApp</ListItem>
+              </List>
+            </Slide>
           </Deck>
         );
       }

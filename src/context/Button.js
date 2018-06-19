@@ -1,17 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import './Button.css';
+import "./Button.css";
 
 export default class Button extends React.Component {
-  render () {
+  render() {
     return (
       <button
         className="button"
-        onClick={() => { console.log('button clicked'); }}
+        onClick={() => {
+          console.log("button clicked");
+        }}
         style={{ backgroundColor: this.props.color }}
       >
         {this.props.children}
       </button>
     );
-  } 
-};
+  }
+}

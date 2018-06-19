@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import './Header.css';
+import "./Header.css";
 
-const Header = (props) => (
+const Header = props => (
   <div className="header" style={{ backgroundColor: props.color }}>
     {props.children}
   </div>

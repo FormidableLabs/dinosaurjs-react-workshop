@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './ContextApp.css';
+import { Provider } from "./NotificationContext";
+import Header from "./Header";
+import Notification from "./Notification";
+import Content from "./Content";
 
-import { Provider } from './NotificationContext';
-import Header from './Header';
-import Notification from './Notification';
-import Content from './Content';
+import "../ContextApp.css";
 
 class ContextApp extends Component {
   state = {
-    notification: null,
+    notification: null
   };
   addNotification = n => {
     this.setState({
-      notification: n,
+      notification: n
     });
   };
   removeNotification = () => {
     this.setState({
-      notification: null,
+      notification: null
     });
   };
   contextValue = {
     addNotification: this.addNotification,
-    removeNotification: this.removeNotification,
+    removeNotification: this.removeNotification
   };
   render() {
     return (

@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { Consumer as ThemeConsumer } from './ThemeContext';
-import { Consumer } from './NotificationContext';
-import './Button.css';
+import { Consumer as ThemeConsumer } from "./ThemeContext";
+import { Consumer as NotificationConsumer } from "./NotificationContext";
+import "../Button.css";
 
 export default class Button extends React.Component {
   render() {
     return (
-      <Consumer>
+      <NotificationConsumer>
         {({ addNotification }) => (
           <ThemeConsumer>
             {({ color }) => (
               <button
                 className="button"
                 onClick={() => {
-                  addNotification('IM A NOTIFICATION!');
+                  addNotification("IM A NOTIFICATION!");
                 }}
                 style={{ backgroundColor: color }}
               >
@@ -23,7 +23,7 @@ export default class Button extends React.Component {
             )}
           </ThemeConsumer>
         )}
-      </Consumer>
+      </NotificationConsumer>
     );
   }
 }

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { Consumer as ThemeConsumer } from './ThemeContext';
-import './Button.css';
+import { Consumer as ThemeConsumer } from "./ThemeContext";
+import "../Button.css";
 
 export default class Button extends React.Component {
   render() {
@@ -10,7 +10,9 @@ export default class Button extends React.Component {
         {({ color }) => (
           <button
             className="button"
-            onClick={() => { console.log('button clicked!') }}
+            onClick={() => {
+              console.log("button clicked!");
+            }}
             style={{ backgroundColor: color }}
           >
             {this.props.children}

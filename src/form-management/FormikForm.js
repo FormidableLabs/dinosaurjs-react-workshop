@@ -1,55 +1,53 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './FormikForm.css';
+import "./FormikForm.css";
 
-const Content = (props) => (
+const Values = props => (
   <div className="contentWrapper">
     <pre>
       <code>
-        <p>email: {props.data.email}</p>
-        <p>pizzaFruit: {props.data.pizzaFruit}</p>  
-        <p>password: {props.data.password}</p>
+        {"values = {"}
+        <p> email: {props.data.email}</p>
+        <p> pizzaFruit: {props.data.pizzaFruit}</p>
+        <p> password: {props.data.password}</p>
+        {"}\n\n"}
       </code>
     </pre>
   </div>
-)
+);
 
 class FormikForm extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      pizzaFruit: '',
-      password: ''
+      email: "",
+      pizzaFruit: "",
+      password: ""
     };
-    this.handleChange = this.handleChange.bind(this); 
   }
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
-  }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('submitted:', this.state);
-  }
+  };
   render() {
     return (
-    <div className="pageWrapper">
-      <div className="formWrapper">
-        <form onSubmit={this.handleSubmit}>
+      <div className="pageWrapper">
+        <div className="formWrapper">
           <input
             type="text"
             name="email"
             placeholder="Email"
             value={this.state.email}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+          />
           <input
             type="password"
             name="password"
             placeholder="Password"
             value={this.state.password}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}
+          />
           <select
             name="pizzaFruit"
             value={this.state.fruit}
@@ -60,13 +58,12 @@ class FormikForm extends Component {
             <option value="pear">Pear</option>
             <option value="mango">Mango</option>
           </select>
-          <button type="submit">Submit</button>
-        </form>
+          <button type="submit" onClick={this.handleSubmit}>
+            Submit
+          </button>
+        </div>
+        <Values data={this.state} />
       </div>
-      <Content
-        data={this.state}
-      />
-    </div>
     );
   }
 }

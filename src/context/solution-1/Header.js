@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { Consumer } from './ThemeContext';
+import { Consumer } from "./ThemeContext";
 
-import './Header.css';
+import "../Header.css";
 
 export default class Header extends React.Component {
   render() {

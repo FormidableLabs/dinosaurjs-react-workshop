@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no" />
-  <title>Spectacle</title>
+  <title>Form Management</title>
   <link href="https://fonts.googleapis.com/css?family=Lobster+Two:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
   <link href="https://unpkg.com/normalize.css@7/normalize.css" rel="stylesheet" type="text/css">
@@ -55,24 +55,22 @@
                   constructor(props) {
                     this.state = { email: '' };
 
-                    this.handleNameChange = this.handleNameChange.bind(this);
+                    this.handleEmailChange = this.handleEmailChange.bind(this);
                     this.handleSubmit = this.handleSubmit.bind(this);
                   }
 
                   render() {
                     return (
-                      <form onSubmit={this.handleSubmit}>
-                        <label>
-                          Email:
-                          <input
-                            type="text"
-                            name="email"
-                            value={this.state.email}
-                            onChange={() => {this.handleEmailChange(event); }}
-                          />
-                        </label>
-                        <button type="submit" value="Submit"><button/>
-                      </form>
+                      <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        value={this.state.email}
+                        onChange={() => {this.handleEmailChange(event); }}
+                      />
+                      <button type="submit" onClick={this.handleSubmit}>
+                        Submit
+                      </button>
                     );
                   }
                 }
@@ -131,38 +129,30 @@
                 <Formik
                   initialValues={...}
                   onSubmit={...}
-                  render={({ handleChange, values }) => {
+                  render={({ values, handleChange, handleSubmit }) => {
                     return (
-                      <form onSubmit={this.handleSubmit}>
-                        <label>
-                          Email:
-                          <input
-                            type="text"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange}
-                          />
-                        </label>
-                        <button type="submit" value="Submit"><button/>
-                      </form>
+                      <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        value={values.email}
+                        onChange={handleChange}
+                      />
+                      <button type="submit" onClick={handleSubmit}>
+                        Submit
+                      </button>
                     );
                   }} />
                 `}
               />
             </Slide>
-            <Slide>
-              <List>
-                <ListItem>handleChange, handleBlur, handleSubmit</ListItem>
-                <ListItem>setFieldValue, setFieldTouched, setFieldError</ListItem>
-              </List>
-            </Slide>
             <Slide bgColor="#2a2734">
               <CodePane textSize="1rem" lang="javascript" source={`  
                 <Formik
                   initialValues={{
-                    email,
-                    password,
-                    fruit,
+                    email: '',
+                    password: '',
+                    fruit: '',
                     ...
                   }}
                   onSubmit={ values => {
@@ -178,7 +168,9 @@
               </Heading>
               <List>
                 <ListItem>Create a form in Formik using the provided form</ListItem>
-                <ListItem>Log the data when the form is submitted</ListItem>
+                <ListItem>Move the initial values from state to the initialValues prop</ListItem>
+                <ListItem>Log the data when the form is submitted using onSubmit</ListItem>
+                <ListItem>Pass the values, handleChange and handleSubmit props to the inputs</ListItem>
                 <ListItem>Add an additional form input</ListItem>
               </List>
             </Slide>
@@ -194,9 +186,13 @@
               </Heading>
             </Slide>
             <Slide>
+              <Heading size={4}>
+                Field
+              </Heading>
               <List>
-                <ListItem>Magically connects inputs to Formik using the `name` attribute</ListItem>
-                <ListItem>Change the element by using the `component` prop</ListItem>
+                <ListItem>Magically connects inputs using the `name` attribute</ListItem>
+                <ListItem>Defaults to `input`</ListItem>
+                <ListItem>Change the element type by using the `component` prop</ListItem>
               </List>
             </Slide>
             <Slide bgColor="#2a2734">
@@ -204,15 +200,12 @@
                 <Formik
                   initialValues={...}
                   onSubmit={...}
-                  render={({ values }) => {
+                  render={({ values, handleSubmit }) => {
                     return (
-                      <form onSubmit={this.handleSubmit}>
-                        <label>
-                          Email:
-                          <Field type="text" name="email" />
-                        </label>
-                        <button type="submit" value="Submit"><button/>
-                      </form>
+                      <Field type="text" name="email" />
+                      <button type="submit" onClick={handleSubmit}>
+                        Submit
+                      </button>
                     );
                   }} />
                 `}
@@ -232,25 +225,73 @@
                 Everybody Needs Some Validation
               </Heading>
             </Slide>
-            <Slide bgColor="#2a2734">
-  <CodePane textSize="1.5rem" lang="javascript" source={`
-    const validate = value => {
-      if (value.length > 50) {
-        return 'The value must be less than 50 characters.';
-      }
-    }
-  `}
-  />
+            <Slide>
+              <Heading size={4}>
+                Pass the `validate` prop on Field a validation function
+              </Heading>
             </Slide>
+            <Slide bgColor="#2a2734">
+              <CodePane textSize="1.25rem" lang="javascript" source={`
+    <Formik
+      initialValues={...}
+      onSubmit={...}
+      render={({ values, handleSubmit }) => {
+        return (
+          <Field
+            type="text"
+            name="email"
+            validate={value => {
+              if (value.length > 50) {
+                return "This value is too long!"
+              }
+            }} />
+          <button type="submit" onClick={handleSubmit}>
+            Submit
+          </button>
+        );
+      }} />
+                `}
+              />
+            </Slide>
+            <Slide>
+                <Heading size={4}>
+                  Show error messages with Formik's `errors`
+                </Heading>
+              </Slide>
+              <Slide bgColor="#2a2734">
+                <CodePane textSize="1.25rem" lang="javascript" source={`
+      <Formik
+        initialValues={...}
+        onSubmit={...}
+        render={({ values, handleSubmit, errors }) => {
+          return (
+            <Field
+              type="text"
+              name="email"
+              validate={value => {
+                if (value.length > 50) {
+                  return "This value is too long!"
+                }
+              }} />
+              {errors.email} /* keyed by name!! */
+            <button type="submit" onClick={handleSubmit}>
+              Submit
+            </button>
+          );
+        }} />
+                  `}
+                />
+              </Slide>
             <Slide>
               <Heading size={4}>
                 Exercise 3
               </Heading>
               <List>
                 <ListItem>Write a function that validates a required input</ListItem>
+                <ListItem>Use that function to validate the Email and the Password Fields</ListItem>
                 <ListItem>Write a validation function for the select tag</ListItem>
                 <ListItem>Display error messages if the input has been touched</ListItem>
-                <ListItem>Show the errors in the Content component</ListItem>
+                <ListItem>Extra Time? Show errors in Values component</ListItem>
               </List>
             </Slide>
             <Slide>

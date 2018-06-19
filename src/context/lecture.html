@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no" />
-  <title>Spectacle</title>
+  <title>Context</title>
   <link href="https://fonts.googleapis.com/css?family=Lobster+Two:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
   <link href="https://unpkg.com/normalize.css@7/normalize.css" rel="stylesheet" type="text/css">
@@ -25,6 +25,7 @@
         const theme = defaultTheme({
           primary: "white",
           secondary: "#2980b9",
+          quarternary: "#ffcc99"
         });
         theme.screen.components.heading.h1.color = "#2980b9";
         theme.screen.components.heading.h2.color = "#2980b9";
@@ -44,11 +45,9 @@
               </Heading>
             </Slide>
             <Slide>
-              <Heading>
+              <Heading size={4}>
                 What is Context?
               </Heading>
-            </Slide>
-            <Slide>
               <List>
                 <ListItem>Previously secret API</ListItem>
                 <ListItem>New version released in 16.3</ListItem>
@@ -135,25 +134,15 @@ class B extends React.Component {
             </Slide>
             <Slide bgColor="#2a2734">
                 <CodePane textSize="2rem" lang="javascript" source={`
-import { createContext } from 'react';
-const {
-  Provider,
-  Consumer
-} = createContext();
-                    `}
-                />
-            </Slide>
-            <Slide bgColor="#2a2734">
-                <CodePane textSize="2rem" lang="javascript" source={`
-import { createContext } from 'react';
-const {
-  Provider,
-  Consumer
-} = createContext(val); 
-// val is the default context
+    import { createContext } from 'react';
 
-export { Provider, Consumer };
-                      `}
+    const {
+      Provider,
+      Consumer
+    } = createContext();
+
+    export { Provider, Consumer };
+                    `}
                 />
             </Slide>
             <Slide bgColor="#2a2734">
@@ -161,7 +150,7 @@ export { Provider, Consumer };
  class A extends React.Component {
    render() {
      return (
-       <Provider value={value}>
+       <Provider value={{ loading: true }}>
           <B/>
        </Provider>
      )
@@ -171,12 +160,16 @@ export { Provider, Consumer };
                 />
             </Slide>
             <Slide bgColor="#2a2734">
-                <CodePane textSize="2rem" lang="javascript" source={`
- class B extends React.Component {
+                <CodePane textSize="1.5rem" lang="javascript" source={`
+ class C extends React.Component {
    render() {
      return (
        <Consumer>
-         {value => <C value={value}/>}
+         {({ loading }) => {
+           return (
+            <button disabled={loading}>Click me!</button>
+            )}
+          }
        </Consumer>
      )
    }
@@ -186,20 +179,35 @@ export { Provider, Consumer };
             </Slide>
             <Slide>
               <Heading>
-                Updating Default Context
+                Default Context
               </Heading>
             </Slide>
             <Slide bgColor="#2a2734">
                 <CodePane textSize="2rem" lang="javascript" source={`
-class Data extends React.Component {
-  state = {
-    data: 1
-  };
+import { createContext } from 'react';
+const {
+  Provider,
+  Consumer
+} = createContext({
+  favoriteFood: 'cheese'
+}); 
+
+export { Provider, Consumer };
+                      `}
+                />
+            </Slide>
+            <Slide bgColor="#2a2734">
+                <CodePane textSize="2rem" lang="javascript" source={`
+class C extends React.Component {
   render() {
     return (
-      <Provider value={this.state.data}>
-        {this.props.children}
-      </Provider>
+      <Consumer>
+        {({ favoriteFood }) => (
+          <p>
+            My favorite food is: {favoriteFood}
+          </p>
+        )}
+      </Consumer>
     )
   }
 }
@@ -211,9 +219,9 @@ class Data extends React.Component {
                 Exercise 1
               </Heading>
               <List>
-                <ListItem>Create a context called ThemeContext with a color of '#fd79a8'</ListItem>
-                <ListItem>Give Header that background color using the consumer</ListItem>
-                <ListItem>Give Button a background color of '#00b7f9' using the provider</ListItem>
+                <ListItem>Create a context called ThemeContext with a default color of 'deeppink'</ListItem>
+                <ListItem>Give Header and Button that background color using the consumer</ListItem>
+                <ListItem>Wait, now give the Button a new background color of 'lightpink' using the provider</ListItem>
               </List>
             </Slide>
             <Slide>
@@ -265,27 +273,26 @@ class Child extends React.Component {
                 />
             </Slide>
             <Slide>
-              <Heading size={4}>
-                Whats context good for?
-              </Heading>
+              <Heading size={4}>Exercise 2</Heading>
               <List>
-                <ListItem>Theming</ListItem>
-                <ListItem>Global Data Store (like Redux)</ListItem>
-                <ListItem>Renderless Components</ListItem>
-                <ListItem>i18n</ListItem>
-                <ListItem>Communication between arbitrarily nested subcomponents</ListItem>
-                <ListItem>It's testable</ListItem>
+                <ListItem>Write two methods: addNotification and removeNotification</ListItem>
+                <ListItem>Create a context called NotificationContext</ListItem>
+                <ListItem>Consume the removeNotification with with the Notification</ListItem>
+                <ListItem>Consume the addNotification method with the Button</ListItem>
               </List>
             </Slide>
             <Slide>
-              <Heading size={4}>Exercise 2</Heading>
-              <List>
-                <ListItem>Create a context called NotificationContext</ListItem>
-                <ListItem>Write a addNotifications method to add a notification to our App state</ListItem>
-                <ListItem>Write a removeNotifications method to remove the notification from our App state</ListItem>
-                <ListItem>Pass the methods to the correct components through the context</ListItem>
-              </List>
-            </Slide>
+                <Heading size={4}>
+                  Whats context good for?
+                </Heading>
+                <List>
+                  <ListItem>Theming</ListItem>
+                  <ListItem>Global Data Store (like Redux)</ListItem>
+                  <ListItem>i18n</ListItem>
+                  <ListItem>Communication between arbitrarily nested subcomponents</ListItem>
+                  <ListItem>It's testable</ListItem>
+                </List>
+              </Slide>
           </Deck>
         );
       }

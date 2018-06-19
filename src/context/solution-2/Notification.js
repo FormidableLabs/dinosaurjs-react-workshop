@@ -1,17 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { Consumer } from './NotificationContext';
+import { Consumer } from "./NotificationContext";
 
-import './Notification.css';
+import "../Notification.css";
 
-const Notification = (props) => (
+const Notification = props => (
   <Consumer>
     {({ removeNotification }) => (
-      <div
-        className="notification"
-      >
+      <div className="notification">
         {props.children}
-        <span style={{ float: 'right', cursor: 'pointer' }} onClick={removeNotification}>
+        <span
+          style={{ float: "right", cursor: "pointer" }}
+          onClick={removeNotification}
+        >
           X
         </span>
       </div>

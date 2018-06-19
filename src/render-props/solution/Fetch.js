@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Fetch extends Component {
   state = {
     loading: true,
     error: null,
-    data: null,
+    data: null
   };
   componentDidMount() {
     fetch(this.props.url)
@@ -12,13 +12,13 @@ class Fetch extends Component {
       .then(data => {
         this.setState({
           data,
-          loading: false,
+          loading: false
         });
       })
       .catch(err => {
         this.setState({
           error: err,
-          loading: false,
+          loading: false
         });
       });
   }
