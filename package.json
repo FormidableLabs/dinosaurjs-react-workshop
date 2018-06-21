@@ -1,7 +1,7 @@
 {
   "name": "dinosaurjs-react-workshop",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
   "dependencies": {
     "formik": "^0.11.11",
     "react": "^16.4.0",
