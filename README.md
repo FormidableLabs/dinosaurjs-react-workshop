@@ -1,8 +1,12 @@
 ## Setup
 
-Clone this repo onto your machine.
+1.  Clone this repo onto your machine.
+
+2.  Install npm
 
 ### `npm install`
+
+3.  Run the app
 
 ### `npm start`
 
