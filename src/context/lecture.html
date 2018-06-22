@@ -52,7 +52,7 @@
                 What is Context?
               </Heading>
               <List>
-                <ListItem>Previously secret API</ListItem>
+                <ListItem>Previously "internal" API</ListItem>
                 <ListItem>New version released in 16.3</ListItem>
                 <ListItem>Lets you teleport data around your app</ListItem>
               </List>
@@ -168,11 +168,9 @@ class B extends React.Component {
    render() {
      return (
        <Consumer>
-         {({ loading }) => {
-           return (
+         {({ loading }) => (
             <button disabled={loading}>Click me!</button>
-            )}
-          }
+          )}
        </Consumer>
      )
    }
@@ -281,7 +279,8 @@ class Child extends React.Component {
                 <ListItem>Write two methods: addNotification and removeNotification</ListItem>
                 <ListItem>Create a context called NotificationContext</ListItem>
                 <ListItem>Consume the removeNotification with with the Notification</ListItem>
-                <ListItem>Consume the addNotification method with the Button</ListItem>
+                <ListItem>Remove the Theme context from the Button, and consume addNotification method with the Button.</ListItem>
+                <ListItem>Extra Time? See if you get the Button to use both Theme and Notification contexts</ListItem>
               </List>
             </Slide>
             <Slide>
@@ -293,7 +292,7 @@ class Child extends React.Component {
                   <ListItem>Global Data Store (like Redux)</ListItem>
                   <ListItem>i18n</ListItem>
                   <ListItem>Communication between arbitrarily nested subcomponents</ListItem>
-                  <ListItem>It's testable</ListItem>
+                  <ListItem>(It's also easy to test!)</ListItem>
                 </List>
               </Slide>
           </Deck>
