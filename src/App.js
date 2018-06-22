@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
 import RenderPropsApp from "./render-props/RenderPropsApp";
@@ -43,10 +43,30 @@ class App extends Component {
               Form Management
             </NavLink>
           </div>
-          <Route exact path="/" render={() => <h3>Please select a topic</h3>} />
-          <Route path="/render-props" component={RenderPropsApp} />
-          <Route path="/context" component={ContextApp} />
-          <Route path="/form-management" component={FormikForm} />
+          <div className="contents">
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Fragment>
+                  <p>Welcome to Intermediate React!</p>
+                  <p>The slides are right here</p>
+                  <p>
+                    <pre>open src/render-props/lecture.html</pre>
+                  </p>
+                  <p>
+                    <pre>open src/context/lecture.html</pre>
+                  </p>
+                  <p>
+                    <pre>open src/form-management/lecture.html</pre>
+                  </p>
+                </Fragment>
+              )}
+            />
+            <Route path="/render-props" component={RenderPropsApp} />
+            <Route path="/context" component={ContextApp} />
+            <Route path="/form-management" component={FormikForm} />
+          </div>
         </div>
       </Router>
     );

@@ -14,21 +14,17 @@ class RenderPropsApp extends Component {
           return loading ? (
             <p>Loading</p>
           ) : (
-            <pre>
-              <code>
-                {"{"}
-                <p> id: {data.id}</p>
-                <p> name: {data.name}</p>
-                <p> username: {data.username}</p>
-                <p> email: {data.email}</p>
-                <p>
-                  {" "}
-                  address: {data.address.street} {data.address.suite},{" "}
-                  {data.address.city}
-                </p>
-                {"}\n\n"}
-              </code>
-            </pre>
+            <div>
+              <p> id: {data.id}</p>
+              <p> name: {data.name}</p>
+              <p> username: {data.username}</p>
+              <p> email: {data.email}</p>
+              <p>
+                {" "}
+                address: {data.address.street} {data.address.suite},{" "}
+                {data.address.city}
+              </p>
+            </div>
           );
         }}
       </Fetch>

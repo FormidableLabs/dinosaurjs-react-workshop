@@ -43,34 +43,27 @@
               <Heading>
                 Render Props
               </Heading>
+              <Text>
+                src/render-props/lecture.html
+              </Text>
             </Slide>
             {
-              MarkdownSlides`
-## Whats a render prop?
+MarkdownSlides`
+## What's a render prop?
 ---
 ### Render Props
 * Pattern used for externalizing internal component data
-* Flexible replacement for HoCs
+* Flexible replacement for higher-order components (HoCs)
+* Not a new API, a new technique
 ---
-## In short, calling this.props.children as a function
+## Calling this.props.something as a function
 ---
 ### There are two ways to do this:
----
-### Functional Child
-              `
+`
             }
-            <Slide bgColor="#2a2734">
-              <CodePane textSize="2rem" lang="javascript" source={`
-<MyComponent>
-  {(args) => (
-    <p>User code</p>
-  )}
-</MyComponent>
-              `}/>
-            </Slide>
             <Slide>
               <Heading size={2}>
-                Render Prop
+                Functional Prop
               </Heading>
             </Slide>
             <Slide bgColor="#2a2734">
@@ -84,6 +77,21 @@
               />
             </Slide>
             <Slide>
+                <Heading size={2}>
+                  Functional Children
+                </Heading>
+              </Slide>
+              <Slide bgColor="#2a2734">
+                <CodePane textSize="2rem" lang="javascript" source={`
+  <MyComponent>
+    {(args) => (
+      <p>User code</p>
+    )}
+  </MyComponent>
+                `}/>
+              </Slide>
+  
+            <Slide>
               <Heading size={2}>
                 So how does it work?
               </Heading>
@@ -92,7 +100,9 @@
                 <CodePane textSize="2rem" lang="javascript" source={`
 class MyComponent extends React.Component {
   render() {
-    return this.props.children("world")
+    return this.props.children({
+      thing: "world"
+    })
   }
 }
                   `}
@@ -101,8 +111,8 @@ class MyComponent extends React.Component {
             <Slide bgColor="#2a2734">
                 <CodePane textSize="2rem" lang="javascript" source={`
 <MyComponent>
-  {var => (
-    <p>Hello {var}</p>
+  {params => (
+    <p>Hello {params.thing}</p>
   )}
 </MyComponent>
                   `}
@@ -114,7 +124,7 @@ class MyComponent extends React.Component {
               </Heading>
               <List>
                 <ListItem>Pass a url to Fetch to get data</ListItem>
-                <ListItem>Use `loading`, `data`, and `error` to store data in Fetch's state</ListItem>
+                <ListItem>Use loading, data, and error to store data in Fetch's state</ListItem>
                 <ListItem>Render the data, error or loading with a render prop in RenderPropsApp</ListItem>
               </List>
             </Slide>
