@@ -49,7 +49,7 @@
             </Slide>
             <Slide>
               <Heading>
-                Writing forms is tedious
+                Writing forms in React is tedious
               </Heading>
             </Slide>
             <Slide bgColor='#2a2734'>
@@ -119,7 +119,8 @@
                 <ListItem>All you do is handle submission</ListItem>
                 <ListItem>Exposes reusable methods and event handlers</ListItem>
                 <ListItem>Makes validation and error messages easier</ListItem>
-                <ListItem>Supports nested values! e.g. address.street</ListItem>
+                <ListItem>Let's you write much more reusable code</ListItem>
+                <ListItem>Supports nested values (e.g. address.street)</ListItem>
               </List>
             </Slide>
             <Slide>
@@ -167,7 +168,7 @@
             </Slide>
             <Slide>
               <Heading size={4}>
-                Exercise 1
+                Code-along 1
               </Heading>
               <List>
                 <ListItem>Create a form in Formik using the provided form</ListItem>
@@ -175,6 +176,7 @@
                 <ListItem>Log the data when the form is submitted using onSubmit</ListItem>
                 <ListItem>Pass the values, handleChange and handleSubmit props to the inputs</ListItem>
                 <ListItem>Add an additional form input</ListItem>
+                <ListItem>The <a href="https://github.com/jaredpalmer/formik">Formik Docs</a> are pretty helpful!</ListItem>
               </List>
             </Slide>
             <Slide>
@@ -193,9 +195,9 @@
                 Field
               </Heading>
               <List>
-                <ListItem>Magically connects inputs using the `name` attribute</ListItem>
-                <ListItem>Defaults to `input`</ListItem>
-                <ListItem>Change the element type by using the `component` prop</ListItem>
+                <ListItem>Magically connects inputs using the "name" attribute</ListItem>
+                <ListItem>Defaults to "input"</ListItem>
+                <ListItem>Change the element type by using the "component" prop</ListItem>
               </List>
             </Slide>
             <Slide bgColor="#2a2734">
@@ -216,10 +218,10 @@
             </Slide>
             <Slide>
               <Heading size={4}>
-                Exercise 2
+                Code-along 2
               </Heading>
               <List>
-                <ListItem>Convert all form elements to `Field` tags</ListItem>
+                <ListItem>Convert all form elements to "Field" tags</ListItem>
                 <ListItem>Make sure the form still works</ListItem>
               </List>
             </Slide>
@@ -230,7 +232,7 @@
             </Slide>
             <Slide>
               <Heading size={4}>
-                Pass the `validate` prop on Field a validation function
+                Pass the "validate" prop on Field a validation function
               </Heading>
             </Slide>
             <Slide bgColor="#2a2734">
@@ -258,7 +260,7 @@
             </Slide>
             <Slide>
                 <Heading size={4}>
-                  Show error messages with Formik's `errors`
+                  Show error messages with Formik's "errors"
                 </Heading>
               </Slide>
               <Slide bgColor="#2a2734">
@@ -287,7 +289,7 @@
               </Slide>
             <Slide>
               <Heading size={4}>
-                Exercise 3
+                Code-along 3
               </Heading>
               <List>
                 <ListItem>Write a function that validates a required input</ListItem>
@@ -299,11 +301,14 @@
             </Slide>
             <Slide>
               <Heading size={4}>
-                More things but we won't cover them
+                ...and there's so much more
               </Heading>
               <List>
-                <ListItem>Validation: Yup</ListItem>
-                <ListItem>Custom field types using `Field`</ListItem>
+                <ListItem>Validation of all fields</ListItem>
+                <ListItem>Validation schemas with Yup</ListItem>
+                <ListItem>"Field" with custom components</ListItem>
+                <ListItem>"touched" fields</ListItem>
+                <ListItem>"submitting" status</ListItem>
               </List>
             </Slide>
           </Deck>
